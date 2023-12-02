@@ -1,0 +1,86 @@
+.search-div input{
+    display: flex;
+    margin: 10px auto;
+    width: 24%;
+    font-size: 14px;
+    outline: none;
+    color: white;
+    padding: 9px 5px;
+    border-radius: 0 30px;
+    background-color: transparent;
+    text-indent: 13px;
+}
+.detail-card{
+margin:  10px auto;
+width: 24%;
+padding: 15px;
+border-radius: 0 12px;
+background: linear-gradient(148deg,rgba(1,152,255,.18) 0%,rgba(0,0,0,0) 100%);
+   color: white;
+}
+.card-all-div{
+    display: flex;
+    flex-wrap: wrap;
+}
+.card-text{
+    padding: 2px 0;
+}
+.card {
+    margin: 16px 1.5%;
+    background: linear-gradient(148deg,rgba(1,152,255,.18) 0%,rgba(0,0,0,0) 100%);
+    width: 22%;
+    padding: 15px;
+    border-radius: 0 12px;
+   
+}
+.card img{
+    height: 322px;
+    width: 100%;
+}
+.name{
+    font-style: italic ;
+    font-weight: 700;
+}
+.card h5{
+    font-weight: 500;
+    margin: 4px 0;
+}
+.second-h5{
+    padding-bottom: 10px;
+}
+.x{
+    padding-bottom: 6px;
+}
+.z{
+    display: block;
+    margin-bottom: 6px;
+
+}
+.first{
+    margin-top: 4px;
+}
+button,
+.detail{
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background: linear-gradient(75deg,blue 0%,rgb(109, 3, 109) 100%);
+    padding: 12px 26px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
+    align-items: center;
+    border: 0px ;
+    border-radius: 0 20px;
+   
+}
+h5{
+    color: white;
+}
+.bts{
+    margin: 5px auto;
+    width: 93%;
+    display: flex;
+    justify-content: space-between;
+}

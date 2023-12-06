@@ -10,7 +10,6 @@ const FilmDetail = () => {
 
        fetch(`https://www.omdbapi.com/?i=${id}&apikey=6be6c7a0`).then(res=>res.json())
        .then(data=>{ 
-console.log(data)
           setMovie(data);}
        )
  

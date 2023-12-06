@@ -2,38 +2,55 @@ import React from 'react'
 import './Pages.css'
 import ClipLoader from "react-spinners/ClipLoader";
 
-import { Link } from 'react-router-dom'
+import { Link, useFetcher } from 'react-router-dom'
 import { useState , useEffect,CSSProperties} from 'react'
 import FilmDetail from './FilmDetail'
+import Leftlist from '../components/ListLeft/Leftlist';
 const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
   borderColor: "red",
 };
 const Home = () => {
+  
   const [searchMyData, setSearchMyData] = useState("")
+  const [searchButton, setSearchButton] = useState("harry")
+const [display, setDisplay] = useState(false)
+let [loading, setLoading] = useState(true);
+let [color, setColor] = useState("#ffffff");
+const [addList, setAddList] = useState()
+const [resultData, setResultData] = useState([])
+const [movie, setMovie] = useState([])
 
-  const searchData = (e) =>{
+const setDisplayList=(a)=>{
+setMovie(a)
+// console.log(movie)
+setDisplay(true)
+}
+const searchData = (e) =>{
       setSearchMyData(e.target.value.toLowerCase())
     
     }
-    let [loading, setLoading] = useState(true);
-    let [color, setColor] = useState("#ffffff");
-    
-    const [resultData, setResultData] = useState([])
-useEffect(()=>{
-  fetch('https://www.omdbapi.com/?apikey=6be6c7a0&s=movie&type=movie')
-  .then(res=>res.json())
-  .then(data=>{
-console.log(data.Search);
-setLoading(false)
-    setResultData(data.Search)
-   
+    const searchBtn=(e)=>{
+      e.preventDefault();
+      
+      setSearchButton(searchMyData)
+
+    }
+    useEffect(()=>{
+      fetch(`https://www.omdbapi.com/?s=${searchButton}&apikey=6be6c7a0`)
+      .then(res=>res.json())
+      .then(data=>{
+        setLoading(false)
+        setResultData(data.Search)
   })
-},[])
+},[searchButton])
 
   return (
-    <div>
+    <div className='home-page'>
+  {/* <Leftlist display={display} resultData={resultData} id={addList}/> */}
+  <Leftlist display={display} movie={movie} />
+
  <div className="sweet-loading">
      
       <ClipLoader
@@ -49,16 +66,17 @@ setLoading(false)
 <div className="search-div">
 <form action="">
   <input type="text" name="" id="" placeholder='Seach...' onChange={searchData}/>
+  <button className='btn-search' onClick={searchBtn}>Search</button>
 </form>
     
 </div>
 <div className="card-all-div">
-  {
+   {
 
 
 
 
-    resultData.filter(e => e.Title.toLowerCase().includes(searchMyData)).map((a,b)=>(
+    resultData.map((a,b)=>(
       <div className="card" key={b}>
       <img src={a.Poster} alt="film-img" />
       <h5>Film Name: <span className='name'>{a.Title}</span></h5>
@@ -67,12 +85,12 @@ setLoading(false)
      <div className="bts">
 
      <Link className='btn-primary-add detail' to={`/filmdetail/${a.imdbID}`}> Detail</Link>
-      <button className='btn-primary-add'>Add To List</button>
+      <button className='btn-primary-add' onClick={()=>{setDisplayList(a)}}>Add To List</button>
     
      </div>
     </div>
     ))
-  }
+  } 
  
 </div>
 

@@ -10,8 +10,7 @@ import Error404 from './pages/Error404';
 function App() {
   return (
     <div className="App">
-      <List/>
-      
+   
       <Header/>
      <Routes>
       <Route path='/' element={<Home/>}/>

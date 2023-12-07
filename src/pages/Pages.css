@@ -37,6 +37,34 @@ background: linear-gradient(148deg,rgba(1,152,255,.18) 0%,rgba(0,0,0,0) 100%);
 .card-text{
     padding: 2px 0;
 }
+.list-ul li{
+    color: white;
+}
+.listName{
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    list-style: none;
+}
+.wrong{
+    margin: 99px auto;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+.liInner
+{
+    font-style: italic;
+    color: white;
+    align-items: center;
+    display: flex;
+}
+.liInner img{
+    list-style-type: none;
+margin: 10px 20px;
+    width: 110px;
+}
+
 .card {
     margin: 16px 1.5%;
     background: linear-gradient(148deg,rgba(1,152,255,.18) 0%,rgba(0,0,0,0) 100%);

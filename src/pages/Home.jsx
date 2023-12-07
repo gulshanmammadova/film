@@ -22,19 +22,28 @@ const [addList, setAddList] = useState()
 const [resultData, setResultData] = useState([])
 const [movie, setMovie] = useState([])
 
-const setDisplayList=(a)=>{
-setMovie(a)
-// console.log(movie)
-setDisplay(true)
-}
+const setDisplayList = (a) => {
+  if (movie[0]) { 
+    setMovie(a);
+    setDisplay(false); 
+  } else {
+   
+    setMovie(a);
+    setDisplay(true);
+  }
+};
 const searchData = (e) =>{
+ 
       setSearchMyData(e.target.value.toLowerCase())
-    
     }
     const searchBtn=(e)=>{
       e.preventDefault();
-      
-      setSearchButton(searchMyData)
+      if (!searchMyData.trim() ) {
+        alert('Zehmet olmasa Film adini duzgun daxil edin')
+      }
+   else{
+      setSearchButton(searchMyData.trim())
+      }
 
     }
     useEffect(()=>{
@@ -43,7 +52,7 @@ const searchData = (e) =>{
       .then(data=>{
         setLoading(false)
         setResultData(data.Search)
-  })
+  }).catch((err)=>(alert('Internet bağlantınızı yoxlayın')))
 },[searchButton])
 
   return (
@@ -65,17 +74,13 @@ const searchData = (e) =>{
 <div>
 <div className="search-div">
 <form action="">
-  <input type="text" name="" id="" placeholder='Seach...' onChange={searchData}/>
+  <input type="text" name="" id="" placeholder='Seach...' onChange={searchData} required/>
   <button className='btn-search' onClick={searchBtn}>Search</button>
 </form>
     
 </div>
 <div className="card-all-div">
-   {
-
-
-
-
+{resultData && resultData.length > 0 ? (
     resultData.map((a,b)=>(
       <div className="card" key={b}>
       <img src={a.Poster} alt="film-img" />
@@ -89,7 +94,13 @@ const searchData = (e) =>{
     
      </div>
     </div>
-    ))
+    ))):(
+      <h3 className='wrong '>
+        Film tapmaqda sizə kömək edə bilməyimiz üçün
+        <br />
+         zəhmət olmasa adı tam daxil edin.
+      </h3>
+    )
   } 
  
 </div>

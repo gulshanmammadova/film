@@ -17,30 +17,34 @@ const [dezdList, setDezdList] = useState([])
   // console.log(listItem)
   useEffect(() => {
 
+    if (movie && Object.keys(movie).length > 0 && !listItem.find(item => item.imdbID === movie.imdbID)) {
       setlistItem( [...listItem,movie])
-    
+    }
     
   }, [movie])
   const textInpHandler=(e)=>{
 setInp(e.target.value)
   }
+  const deleteListItem = (id) => {
+    let updatedList = listItem.filter(item => item.imdbID !== id);
+   
+    setlistItem(updatedList);
+    
+  };
  const  createNewList =()=>{
   if (inp.trim() !== '') {
     setlistTitle(inp);
     setlist([...list,  [[inp], [...listItem]]]);
     setInp('');
     setlistItem([]);
-    dispatch(addlist(list))
+    if (listItem.length > 0) {
+    dispatch(addlist(list))}
   }
   
   
 }
 
-  const deleteListItem = (id) => {
-    const updatedList = listItem.filter(item => item.imdbID !== id);
-   
-    setlistItem(updatedList);
-  };
+
   return (
     
             <div className='list-div ' style={{ display: display ? 'block':'none', }} >
@@ -49,14 +53,16 @@ setInp(e.target.value)
 <div className='ul-div'>
   {/* {console.log(listItem.length>2 ? 'saalam ekrana cixar':'ekrana cixarma')} */}
 <ul>
-  {
+  {listItem.length > 0 ? (
   listItem.map((listItem,index)=>(
       <li key={index}>
       {/* {console.log(listItem,listItem.imdbID)} */}
       {/* <img className='list-item-img' src="https://m.media-amazon.com/images/M/MV5BMTg4MDk1ODExN15BMl5BanBnXkFtZTgwNzIyNjg3MDE@._V1_SX300.jpg" alt="List item img"  /> */}
     <p>{listItem.Title} ( {listItem.Year} )</p><FontAwesomeIcon icon={faCircleXmark} onClick={()=>{deleteListItem(listItem.imdbID)}} />
     </li>
-    ))
+    ))):(
+      <p className='wrong'>List is empty!</p>
+    )
   }
  
  

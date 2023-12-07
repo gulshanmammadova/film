@@ -127,10 +127,11 @@ h5{
 .list-div{
     position: absolute;
     right:0;
+    z-index: 9999999999999999;
     border: 1px solid #1e004d;
     width: 450px;
     border-radius: 0 12px ;
-    height: 300px;
+    height: 340px;
     background-color: #060519;
 }
 .home-page{
@@ -166,6 +167,7 @@ h5{
     justify-content: space-between;
     align-items: center;
   } 
+  
   .list-div ul{
     overflow-y: scroll;
     height: 171px;

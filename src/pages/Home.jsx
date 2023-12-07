@@ -1,7 +1,7 @@
 import React from 'react'
 import './Pages.css'
 import ClipLoader from "react-spinners/ClipLoader";
-
+import NA from '../images/NA.png'
 import { Link, useFetcher } from 'react-router-dom'
 import { useState , useEffect,CSSProperties} from 'react'
 import FilmDetail from './FilmDetail'
@@ -75,7 +75,7 @@ const searchData = (e) =>{
 <div className="search-div">
 <form action="">
   <input type="text" name="" id="" placeholder='Seach...' onChange={searchData} required/>
-  <button className='btn-search' onClick={searchBtn}>Search</button>
+  <button className='btn-search ' onClick={searchBtn}>Search</button>
 </form>
     
 </div>
@@ -83,7 +83,7 @@ const searchData = (e) =>{
 {resultData && resultData.length > 0 ? (
     resultData.map((a,b)=>(
       <div className="card" key={b}>
-      <img src={a.Poster} alt="film-img" />
+      <img src={a.Poster=='N/A' ?  NA : a.Poster} alt="film-img" />
       <h5>Film Name: <span className='name'>{a.Title}</span></h5>
       <h5 className='second-h5'>Year : <span className='name'>{a.Year}</span></h5>
   

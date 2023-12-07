@@ -24,7 +24,7 @@ form{
 }
 .detail-card{
 margin:  10px auto;
-width: 24%;
+width: 20%;
 padding: 15px;
 border-radius: 0 12px;
 background: linear-gradient(148deg,rgba(1,152,255,.18) 0%,rgba(0,0,0,0) 100%);
@@ -35,10 +35,13 @@ background: linear-gradient(148deg,rgba(1,152,255,.18) 0%,rgba(0,0,0,0) 100%);
     flex-wrap: wrap;
 }
 .card-text{
-    padding: 2px 0;
+    padding: 0px 0;
 }
 .list-ul li{
     color: white;
+}
+p.card-text{
+    margin-bottom: 1px;
 }
 .listName{
     color: white;
@@ -98,6 +101,7 @@ margin: 10px 20px;
 }
 .first{
     margin-top: 4px;
+    font-size: 19px ;
 }
 button,
 .detail{
@@ -153,6 +157,11 @@ h5{
     opacity: 1; /* Firefox */
   }
   
+  .white{
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+  }
   .inner-list-inp{
     margin:10px auto;
     width: 80%;
@@ -165,7 +174,7 @@ h5{
     padding: 4px 6px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
   } 
   
   .list-div ul{

@@ -19,7 +19,7 @@ const FilmDetail = () => {
     fetchMovieDetails();
   }, [id]);
   if (!movie) {
-    return <div>Loading...</div>;
+    return <div className='White'>Loading...</div>;
   }
   return (
     <div>

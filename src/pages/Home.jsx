@@ -5,6 +5,8 @@ import NA from '../images/NA.png'
 import { Link, useFetcher } from 'react-router-dom'
 import { useState , useEffect,CSSProperties} from 'react'
 import FilmDetail from './FilmDetail'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import Leftlist from '../components/ListLeft/Leftlist';
 const override: CSSProperties = {
   display: "block",
@@ -62,7 +64,7 @@ const searchData = (e) =>{
   <Leftlist display={display} movie={movie} />
 
 
-<div>
+<div className='srch'>
   {
     loading ? (<div></div>):(<div className="search-div">
     <form action="">
@@ -88,18 +90,21 @@ const searchData = (e) =>{
 <div className="card-all-div">
 {resultData && resultData.length > 0 ? (
     resultData.map((a,b)=>(
-      <div className="card" key={b}>
-      <img src={a.Poster=='N/A' ?  NA : a.Poster} alt="film-img" />
-      <h5>Film Name: <span className='name'>{a.Title}</span></h5>
-      <h5 className='second-h5'>Year : <span className='name'>{a.Year}</span></h5>
-  
-     <div className="bts">
 
-     <Link className='btn-primary-add detail' to={`/filmdetail/${a.imdbID}`}> Detail</Link>
+    <Card key={b} style={{ width: '18.5rem',margin: '15px auto'}}>
+    <Card.Img variant="top" className="card-img-top" src={a.Poster=='N/A' ?  NA : a.Poster} alt="Title"/>
+    <Card.Body>
+      <Card.Title className="card-title first">Title : {a.Title}</Card.Title>
+      <Card.Text>
+         <p className="card-text">Year : {a.Year}</p>
+        </Card.Text>
+    </Card.Body>
+    <div style={{display:'flex',justifyContent:'space-between'}}>
+    <Link className='btn-primary-add detail' to={`/filmdetail/${a.imdbID}`}> Detail</Link>
       <button className='btn-primary-add' onClick={()=>{setDisplayList(a)}}>Add To List</button>
-    
-     </div>
+
     </div>
+  </Card>
     ))):(
       <h3 className='wrong '>
         Film tapmaqda sizə kömək edə bilməyimiz üçün

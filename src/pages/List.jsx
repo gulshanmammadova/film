@@ -21,7 +21,7 @@ const List = () => {
               </ul>
             </li>
           ))) :(
-            <p className='wrong wrong2'>Siyahınız Boşdur !!!</p>
+            <p className='wrong wrong2'>List is empty !!!</p>
           )
         }
       </ul>

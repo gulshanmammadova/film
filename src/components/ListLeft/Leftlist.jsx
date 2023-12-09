@@ -40,10 +40,17 @@ setInp(e.target.value)
       setlistTitle(inp);
 
     setlist([...list,  [[inp], [...listItem]]]);
-    setInp(' ');
     setlistItem([]);
     dispatch(addlist(list))
+    setInp('');
+  }else{
+    alert('Siyahi  elave edin !!!')
+
   }
+  }
+  else{
+
+    alert('Siyahi adi elave edin !!!')
   }
   
 }
@@ -53,7 +60,7 @@ setInp(e.target.value)
   return (
     
             <div className='list-div ' style={{ display: display ? 'block':'none', }} >
-      <input type="text" name="" id="" placeholder='Please First Add List Name...' onChange={textInpHandler}/>
+      <input type="text" name="" id="" value={inp} placeholder='Please First Add List Name...' onChange={textInpHandler}/>
      <div  className='inner-list-inp'>
 <div className='ul-div'>
   {/* {console.log(listItem.length>2 ? 'saalam ekrana cixar':'ekrana cixarma')} */}

@@ -30,3 +30,16 @@
     background-color: blueviolet;
     filter: blur(45px);
     }
+    @media (max-width: 990px) {
+        .logo-img {
+            width: 163px;
+        }
+        .nav-right{
+            z-index: 999999;
+        }    
+        .nav-all{
+            align-items: baseline !important;
+        }    
+        
+      }
+      

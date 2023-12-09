@@ -3,6 +3,9 @@ import { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MoonLoader from "react-spinners/MoonLoader";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import NA from '../images/NA.png'
 const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
@@ -46,20 +49,22 @@ let [loading, setLoading] = useState(true);
     <div>
      
       {
-         <div>
-       
-       <div className=" text-start detail-card">
-         <img className="card-img-top" src={movie.Poster} alt="Title"/>
-         <div className="card-body">
-           <h4 className="card-title first">Title : {movie.Title}</h4>
-           <p className="card-text">Director : {movie.Director}</p>
+         
+        <Card style={{ width: '18rem',margin: '15px auto'}}>
+      <Card.Img variant="top" className="card-img-top" src={movie.Poster=='N/A' ?  NA : movie.Poster} alt="Title"/>
+      <Card.Body>
+        <Card.Title className="card-title first">Title : {movie.Title}</Card.Title>
+        <Card.Text>
+        <p className="card-text">Director : {movie.Director}</p>
            <p className="card-text">Year : {movie.Year}</p>
            <p className="card-text x">IMDB : {movie.imdbRating}</p>
-     <Link className='btn-primary-add detail z' to={`https://www.imdb.com/title/${id}`}> Go To Detail</Link>
-        
-         </div>
-       </div>
-       </div>
+        </Card.Text>
+        <Link className='btn-primary-add detail z' to={`https://www.imdb.com/title/${id}`}> Go To Detail</Link>
+
+      </Card.Body>
+    </Card>
+     
+       
       }
       
       

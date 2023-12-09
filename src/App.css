@@ -13,3 +13,8 @@ background-color: #060519;
 padding: 6px 4rem;
 
 }
+@media (max-width: 768px) {
+  .App{
+      padding:2px 2px ;
+  }
+}

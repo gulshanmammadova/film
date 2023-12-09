@@ -90,7 +90,6 @@ const searchData = (e) =>{
 <div className="card-all-div">
 {resultData && resultData.length > 0 ? (
     resultData.map((a,b)=>(
-
     <Card key={b} style={{ width: '18.5rem',margin: '15px auto'}}>
     <Card.Img variant="top" className="card-img-top" src={a.Poster=='N/A' ?  NA : a.Poster} alt="Title"/>
     <Card.Body>

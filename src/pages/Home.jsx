@@ -1,6 +1,6 @@
 import React from 'react'
 import './Pages.css'
-import ClipLoader from "react-spinners/ClipLoader";
+import MoonLoader from "react-spinners/MoonLoader";
 import NA from '../images/NA.png'
 import { Link, useFetcher } from 'react-router-dom'
 import { useState , useEffect,CSSProperties} from 'react'
@@ -9,7 +9,7 @@ import Leftlist from '../components/ListLeft/Leftlist';
 const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
-  borderColor: "red",
+  borderColor: "blueviolet",
 };
 const Home = () => {
   
@@ -32,6 +32,7 @@ const setDisplayList = (a) => {
     setDisplay(true);
   }
 };
+// console.log(movie)
 const searchData = (e) =>{
  
       setSearchMyData(e.target.value.toLowerCase())
@@ -60,25 +61,30 @@ const searchData = (e) =>{
   {/* <Leftlist display={display} resultData={resultData} id={addList}/> */}
   <Leftlist display={display} movie={movie} />
 
+
+<div>
+  {
+    loading ? (<div></div>):(<div className="search-div">
+    <form action="">
+      <input type="text" name="" id="" placeholder='Seach...' onChange={searchData} required/>
+      <button className='btn-search ' onClick={searchBtn}>Search</button>
+    </form>
+        
+    </div>)
+  }
+
  <div className="sweet-loading">
      
-      <ClipLoader
-        color={color}
+      <MoonLoader
+        color='blueviolet'
         loading={loading}
         cssOverride={override}
-        size={150}
+        size={30}
+        margin-top={30}
         aria-label="Loading Spinner"
         data-testid="loader"
       />
     </div>
-<div>
-<div className="search-div">
-<form action="">
-  <input type="text" name="" id="" placeholder='Seach...' onChange={searchData} required/>
-  <button className='btn-search ' onClick={searchBtn}>Search</button>
-</form>
-    
-</div>
 <div className="card-all-div">
 {resultData && resultData.length > 0 ? (
     resultData.map((a,b)=>(

@@ -6,11 +6,11 @@ import NA from '../images/NA.png'
 const List = () => {
   const myList = useSelector((state) => state.listSlice.value);
 
-
+// console.log(myList[myList.length-1][0][1]);
   return (
     <div className='parent'>
       <ul>
-        {myList.length !== 0 &&
+        {myList.length !== 0 ? (
           myList[myList.length - 1].map((item, index) => (
             <li key={index}>
               <p className='listName'>{item[0]}</p>
@@ -20,7 +20,10 @@ const List = () => {
                 ))}
               </ul>
             </li>
-          ))}
+          ))) :(
+            <p className='wrong wrong2'>Siyahınız Boşdur !!!</p>
+          )
+        }
       </ul>
     </div>
   );

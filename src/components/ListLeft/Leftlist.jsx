@@ -26,29 +26,34 @@ const [dezdList, setDezdList] = useState([])
 setInp(e.target.value)
   }
   const deleteListItem = (id) => {
-    let updatedList = listItem.filter(item => item.imdbID !== id);
    
-    setlistItem(updatedList);
+  
+   
+      setlistItem((listItem)=>(listItem.filter(item => item.imdbID != id)));
     
   };
+  console.log(listItem)
  const  createNewList =()=>{
   if (inp.trim() !== '') {
-    setlistTitle(inp);
-    setlist([...list,  [[inp], [...listItem]]]);
-    setInp('');
-    setlistItem([]);
+    
     if (listItem.length > 0) {
-    dispatch(addlist(list))}
+      setlistTitle(inp);
+
+    setlist([...list,  [[inp], [...listItem]]]);
+    setInp(' ');
+    setlistItem([]);
+    dispatch(addlist(list))
+  }
   }
   
-  
 }
+
 
 
   return (
     
             <div className='list-div ' style={{ display: display ? 'block':'none', }} >
-      <input type="text" name="" id="" placeholder='Add List Name...' onChange={textInpHandler}/>
+      <input type="text" name="" id="" placeholder='Please First Add List Name...' onChange={textInpHandler}/>
      <div  className='inner-list-inp'>
 <div className='ul-div'>
   {/* {console.log(listItem.length>2 ? 'saalam ekrana cixar':'ekrana cixarma')} */}
@@ -60,9 +65,7 @@ setInp(e.target.value)
       {/* <img className='list-item-img' src="https://m.media-amazon.com/images/M/MV5BMTg4MDk1ODExN15BMl5BanBnXkFtZTgwNzIyNjg3MDE@._V1_SX300.jpg" alt="List item img"  /> */}
     <p>{listItem.Title} ( {listItem.Year} )</p><FontAwesomeIcon icon={faCircleXmark} onClick={()=>{deleteListItem(listItem.imdbID)}} />
     </li>
-    ))):(
-      <p className='wrong'>List is empty!</p>
-    )
+    ))):(<p className='wrong'>List is empty!</p>)
   }
  
  

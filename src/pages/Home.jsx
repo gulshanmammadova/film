@@ -23,12 +23,14 @@ let [color, setColor] = useState("#ffffff");
 const [addList, setAddList] = useState()
 const [resultData, setResultData] = useState([])
 const [movie, setMovie] = useState([])
-
+const [first, setfirst] = useState(false)
 const setDisplayList = (a) => {
   if (movie[0]) { 
     setMovie(a);
     setDisplay(false); 
+    setfirst(true)
   } else {
+    setfirst(true)
    
     setMovie(a);
     setDisplay(true);
@@ -61,7 +63,7 @@ const searchData = (e) =>{
   return (
     <div className='home-page'>
   {/* <Leftlist display={display} resultData={resultData} id={addList}/> */}
-  <Leftlist display={display} movie={movie} />
+  <Leftlist display={display} movie={movie} first={first} />
 
 
 <div className='srch'>

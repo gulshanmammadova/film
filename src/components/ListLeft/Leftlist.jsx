@@ -1,87 +1,90 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState,useEffect } from 'react'
-import {useSelector,useDispatch} from 'react-redux'
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import {addlist} from '../../listSlice'
-const Leftlist = ({display,movie}) => {
-  const [listItem, setlistItem] = useState([]);
-  const [list, setlist] = useState([]);
-  const listToOtherPage = useSelector((state)=>state.listSlice.value)
-const dispatch=useDispatch()
-const [dezdList, setDezdList] = useState([])
-  const [listTitle, setlistTitle] = useState();
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector, useDispatch } from 'react-redux';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { addlist } from '../../listSlice';
 
+const Leftlist = ({ display, movie }) => {
+  const [listItem, setListItem] = useState([]);
+  const [listTitle, setListTitle] = useState('');
   const [inp, setInp] = useState('');
-
-  // console.log(listItem)
+  const [list, setList] = useState([]);
+  const listToOtherPage = useSelector((state) => state.listSlice.value);
+  const dispatch = useDispatch();
   useEffect(() => {
-
     if (movie && Object.keys(movie).length > 0 && !listItem.find(item => item.imdbID === movie.imdbID)) {
-      setlistItem( [...listItem,movie])
+      setListItem([...listItem, movie]);
+      // localStorage.setItem('data', JSON.stringify(list));
     }
-    
-  }, [movie])
-  const textInpHandler=(e)=>{
-setInp(e.target.value)
-  }
-  const deleteListItem = (id) => {
-   
-  
-   
-      setlistItem((listItem)=>(listItem.filter(item => item.imdbID != id)));
+  }, [movie, inp]);
+
+  const textInpHandler = (e) => {
+    setInp(e.target.value);
     
   };
-  console.log(listItem)
- const  createNewList =()=>{
-  if (inp.trim() !== '') {
+
+  const deleteListItem = (id) => {
+    setListItem((prevItems) => prevItems.filter((item) => item.imdbID !== id));
+
+  };
+  useEffect(() => {
+  setListItem([])
+    }, [list]);
+
+
+    const createNewList = () => {
+      if (inp.trim() !== '') {
+        if (listItem.length > 0) {
+          const existingList = list.find(item => item.title.toUpperCase().trim() === inp.toUpperCase().trim());
+          if (existingList) {
+            alert('A list with this title already exists!');
+            return;
+          }
+          setListTitle(inp);
     
-    if (listItem.length > 0) {
-      setlistTitle(inp);
+          let storedData = JSON.parse(localStorage.getItem('data')) ;
+          let updatedList = [...storedData, { title: inp, items: [...listItem] }];
+          localStorage.setItem('data', JSON.stringify(updatedList));
+     
+          setList(updatedList);
+    
+          setInp('');
+          setListItem([]);
+        } else {
+          alert('Please add items to the list!');
+          setListItem([]);
+        }
+      } else {
 
-    setlist([...list,  [[inp], [...listItem]]]);
-    setlistItem([]);
-    dispatch(addlist(list))
-    setInp('');
-  }else{
-    alert('Siyahi  elave edin !!!')
+        alert('Please add a list name!');
+      }
 
-  }
-  }
-  else{
-
-    alert('Siyahi adi elave edin !!!')
-  }
-  
-}
-
-
-
+    };
+    console.log(listItem)
+    
+  // console.log(localStorage.getItem('data'))
   return (
-    
-            <div className='list-div ' style={{ display: display ? 'block':'none', }} >
-      <input type="text" name="" id="" value={inp} placeholder='Please First Add List Name...' onChange={textInpHandler}/>
-     <div  className='inner-list-inp'>
-<div className='ul-div'>
-  {/* {console.log(listItem.length>2 ? 'saalam ekrana cixar':'ekrana cixarma')} */}
-<ul>
-  {listItem.length > 0 ? (
-  listItem.map((listItem,index)=>(
-      <li key={index}>
-      {/* {console.log(listItem,listItem.imdbID)} */}
-      {/* <img className='list-item-img' src="https://m.media-amazon.com/images/M/MV5BMTg4MDk1ODExN15BMl5BanBnXkFtZTgwNzIyNjg3MDE@._V1_SX300.jpg" alt="List item img"  /> */}
-    <p>{listItem.Title} ( {listItem.Year} )</p><FontAwesomeIcon icon={faCircleXmark} onClick={()=>{deleteListItem(listItem.imdbID)}} />
-    </li>
-    ))):(<p className='wrong'>List is empty!</p>)
-  }
- 
- 
-</ul>
-</div>
-     </div>
-<button  className='create-new-list' onClick={createNewList}>Create List</button>
+    <div className='list-div' style={{ display: display ? 'block' : 'none' }}>
+      <input type="text" value={inp} placeholder='Please First Add List Name...' onChange={textInpHandler} />
+      <div className='inner-list-inp'>
+        <div className='ul-div'>
+          <ul>
+            {listItem.length > 0 ? (
+              listItem.map((item, index) => (
+                <li key={index}>
+                  <p>{item.Title} ({item.Year})</p>
+                  <FontAwesomeIcon icon={faCircleXmark} onClick={() => deleteListItem(item.imdbID)} />
+                </li>
+              ))
+            ) : (
+              <p className='wrong'>List is empty!</p>
+            )}
+          </ul>
+        </div>
       </div>
-  )
-}
+      <button className='create-new-list' onClick={createNewList}>Create List</button>
+    </div>
+  );
+};
 
-export default Leftlist
+export default Leftlist;

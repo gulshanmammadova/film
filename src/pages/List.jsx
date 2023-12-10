@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import './Pages.css'
-import NA from '../images/NA.png'
+import './Pages.css';
+import NA from '../images/NA.png';
 
 const List = () => {
-  const myList = useSelector((state) => state.listSlice.value);
+  const [myList, setMyList] = useState([]);
 
-// console.log(myList[myList.length-1][0][1]);
+  useEffect(() => {
+    getItem();
+  },[] );
+
+  const getItem = () => {
+    const storedData = JSON.parse(localStorage.getItem('data')) || [];
+    setMyList(storedData);
+  };
+
   return (
     <div className='parent'>
       <ul>
         {myList.length !== 0 ? (
-          myList[myList.length - 1].map((item, index) => (
+          myList.map((item, index) => (
             <li key={index}>
-              <p className='listName'>{item[0]}</p>
+              <p className='listName'>{item.title}</p>
               <ul>
-                {item[1].map((innerItem, innerIndex) => (
-                  <li className='liInner' key={innerIndex}><img src={innerItem.Poster=='N/A' ?  NA : innerItem.Poster} alt="" />{innerItem.Title}   ({innerItem.Year})</li>
+                {item.items.map((innerItem, innerIndex) => (
+                  <li className='liInner' key={innerIndex}>
+                    <img src={innerItem.Poster === 'N/A' ? NA : innerItem.Poster} alt="" />
+                    {innerItem.Title} ({innerItem.Year})
+                  </li>
                 ))}
               </ul>
             </li>
-          ))) :(
-            <p className='wrong wrong2'>List is empty !!!</p>
-          )
-        }
+          ))
+        ) : (
+          <p className='wrong wrong2'>List is empty !!!</p>
+        )}
       </ul>
     </div>
   );

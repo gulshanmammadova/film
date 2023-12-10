@@ -13,10 +13,11 @@ const Leftlist = ({ display, movie }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (movie && Object.keys(movie).length > 0 && !listItem.find(item => item.imdbID === movie.imdbID)) {
-      setListItem([...listItem, movie]);
+      setListItem(prevItems => [...prevItems, movie]);
       // localStorage.setItem('data', JSON.stringify(list));
+      // console.log(movie)
     }
-  }, [movie, inp]);
+  }, [movie]);
 
   const textInpHandler = (e) => {
     setInp(e.target.value);
@@ -33,16 +34,22 @@ const Leftlist = ({ display, movie }) => {
 
 
     const createNewList = () => {
+      if (listItem.length === 0) {
+        alert('Please add at least one movie to the list!');
+        return;
+      }
+  
       if (inp.trim() !== '') {
         if (listItem.length > 0) {
-          const existingList = list.find(item => item.title.toUpperCase().trim() === inp.toUpperCase().trim());
-          if (existingList) {
+          let storedData2 = JSON.parse(localStorage.getItem('data')) || [];
+          const existingList = storedData2.find(item => item.title.toUpperCase().trim() === inp.toUpperCase().trim());
+           if (existingList) {
             alert('A list with this title already exists!');
-            return;
+           return;
           }
           setListTitle(inp);
     
-          let storedData = JSON.parse(localStorage.getItem('data')) ;
+          let storedData = JSON.parse(localStorage.getItem('data')) || [] ;
           let updatedList = [...storedData, { title: inp, items: [...listItem] }];
           localStorage.setItem('data', JSON.stringify(updatedList));
      
@@ -60,7 +67,7 @@ const Leftlist = ({ display, movie }) => {
       }
 
     };
-    console.log(listItem)
+    // console.log(listItem)
     
   // console.log(localStorage.getItem('data'))
   return (

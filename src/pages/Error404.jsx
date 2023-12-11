@@ -9,7 +9,7 @@ const Error404 = () => {
         alt="404 Not Found"
         className="error-image"
       />
-      <h1 className="error-text">Oops! Sayfa Bulunamadı.</h1>
+      <h1 className="error-text">Oops! Page is not Found.</h1>
     </div>
     )
 }

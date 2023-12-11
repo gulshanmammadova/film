@@ -41,7 +41,7 @@ const Leftlist = ({ display, movie }) => {
   
       if (inp.trim() !== '') {
         if (listItem.length > 0) {
-          let storedData2 = JSON.parse(localStorage.getItem('data')) || [];
+          let storedData2 = JSON.parse(localStorage.getItem('list')) || [];
           const existingList = storedData2.find(item => item.title.toUpperCase().trim() === inp.toUpperCase().trim());
            if (existingList) {
             alert('A list with this title already exists!');
@@ -49,9 +49,9 @@ const Leftlist = ({ display, movie }) => {
           }
           setListTitle(inp);
     
-          let storedData = JSON.parse(localStorage.getItem('data')) || [] ;
+          let storedData = JSON.parse(localStorage.getItem('list')) || [] ;
           let updatedList = [...storedData, { title: inp, items: [...listItem] }];
-          localStorage.setItem('data', JSON.stringify(updatedList));
+          localStorage.setItem('list', JSON.stringify(updatedList));
      
           setList(updatedList);
     

@@ -11,7 +11,7 @@ const List = () => {
   },[] );
 
   const getItem = () => {
-    const storedData = JSON.parse(localStorage.getItem('data')) || [];
+    const storedData = JSON.parse(localStorage.getItem('list')) || [];
     setMyList(storedData);
   };
 

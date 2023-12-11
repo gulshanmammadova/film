@@ -108,9 +108,9 @@ const searchData = (e) =>{
   </Card>
     ))):(
       <h3 className='wrong '>
-        Film tapmaqda sizə kömək edə bilməyimiz üçün
-        <br />
-         zəhmət olmasa adı tam daxil edin.
+      So we can help you find movies
+    <br />
+    please enter full name.
       </h3>
     )
   } 

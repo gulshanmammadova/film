@@ -248,3 +248,9 @@ display: block;
 }
   }
   
+  @media (max-width: 990px) {
+    .list-div{
+            margin: 1px 3%;
+            position: relative;
+            display: block;
+    }}
